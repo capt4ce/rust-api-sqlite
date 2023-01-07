@@ -1,6 +1,5 @@
 #[macro_use]
 extern crate diesel;
-
 mod controllers;
 mod models;
 mod schema;
@@ -23,9 +22,15 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .data(database_pool.clone())
-            .route("/", web::get().to(controllers::index))
-            .route("/users", web::get().to(controllers::list_users))
-            .route("/users", web::post().to(controllers::create_user))
+            .route("/", web::get().to(controllers::general_controllers::index))
+            .route(
+                "/users",
+                web::get().to(controllers::user_controllers::list_users),
+            )
+            .route(
+                "/users",
+                web::post().to(controllers::user_controllers::create_user),
+            )
     })
     .bind("localhost:8080")?
     .run()
