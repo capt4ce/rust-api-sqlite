@@ -1,7 +1,7 @@
 use crate::schema::*;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, Queryable)]
+#[derive(Debug, Serialize, Deserialize, Queryable, AsChangeset)]
 pub struct User {
     pub id: i32,
     pub name: String,
@@ -18,7 +18,7 @@ pub struct UserNew<'a> {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct UserJson {
-    pub name: String,
-    pub address: String,
+pub struct UserDataJson {
+    pub name: Option<String>,
+    pub address: Option<String>,
 }

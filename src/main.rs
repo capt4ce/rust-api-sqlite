@@ -28,6 +28,18 @@ async fn main() -> std::io::Result<()> {
                 web::get().to(controllers::user_controllers::list_users),
             )
             .route(
+                "/users/{id}",
+                web::get().to(controllers::user_controllers::get_user),
+            )
+            .route(
+                "/users/{id}",
+                web::patch().to(controllers::user_controllers::update_user),
+            )
+            .route(
+                "/users/{id}",
+                web::delete().to(controllers::user_controllers::delete_user),
+            )
+            .route(
                 "/users",
                 web::post().to(controllers::user_controllers::create_user),
             )
